@@ -57,7 +57,7 @@ function requestRss(url, title){
 				
 				var itemNodes = $(xmlDoc).find("item");
 				/* alert(itemNodes.length); */
-				output+="기사:<strong>"+itemNodes.length+"</strong><br>"
+				output+="조회 기사:<strong>"+itemNodes.length+"</strong><br>"
 				var description="";
 				var itemTitle ="";
 				$.each(itemNodes , function(ind , itemNode){
