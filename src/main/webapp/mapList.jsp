@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../fragments/siteProperty.jsp"%>
+<%@ include file="../fragments/siteProperty.jsp" %>
+<%@ include file="../fragments/loginChk.jsp" %>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 <head>
@@ -9,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 
-<title>사용자 메인</title>
+<title>등록 위치 보기</title>
 <link rel="shortcut icon" href="http://192.168.10.68/jsp_prj/common/images/favicon.ico">
 
 <script src="http://192.168.10.68/jsp_prj/common/js/color-modes.js"></script>
@@ -19,7 +21,7 @@
 
 <meta name="theme-color" content="#712cf9">
 <link href="http://192.168.10.68/jsp_prj/common/css/carousel.css" rel="stylesheet">
-<jsp:include page="fragments/bootstrap_css.jsp"></jsp:include>
+<jsp:include page="../fragments/bootstrap_css.jsp"></jsp:include>
 <style type="text/css">
 #wrap{  margin: 0px auto; width: 1200px; height: 1000px; }   
 #header{ height: 150px;    }   
@@ -35,15 +37,41 @@ $(function(){
 });//ready
 
 </script>
+<!-- 다음 지도 api -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31a57f5ce547a6bcc742db7fe29da805"></script>
+<script>
+window.onload=function(){
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
 
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+// marker.setMap(null);
+}//onload
+</script>
 
 </head>
 <body>
    <header data-bs-theme="dark">
-      <jsp:include page="fragments/header.jsp"/>
+      <jsp:include page="../fragments/header.jsp"/>
    </header>
    <main>
-      <jsp:include page="fragments/carousel.jsp"/>
+      <jsp:include page="../fragments/carousel.jsp"/>
       <!-- Marketing messaging and featurettes
   ================================================== -->
       <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -53,25 +81,12 @@ $(function(){
          <!-- START THE FEATURETTES -->
          <hr class="featurette-divider">
          <div class="row featurette">
-            <div class="col-md-7">
-               사용자 메인 페이지 <br>
-               사용자에게 제공할 contents....
-               <c:choose>
-               <c:when test="${ not empty sessionScope.userId }"><br>
-               <img src="upload/${sessionScope.userProfile }" style="width:100px; height:100px; border-radius: 50px;" id="preview"/><br>
+            <div>
+               <h2>식당 리스트</h2>
+               <div id="map" style="width:100%;height:350px;"></div>
                
                
-               <c:out value="${userId }"/>(<a href="${CommonURL }/mypage/mypage.jsp"><c:out value="${userName}"/></a>)님 안녕하세요?
-               <a href="${CommonURL }/login/Logout.jsp">로그아웃</a>
-               <a href="${CommonURL}/map/mapList.jsp">등록한 장소 보기</a>
-               </c:when>
-               <c:otherwise>
-               <a href="login/loginFrm.jsp">로그인</a>
-               <br>
-               </c:otherwise>
-               </c:choose>
-               <br>
-               <a href="${CommonURL}/board/boardList.jsp">게시판</a>
+               
             </div>
             
          </div>
@@ -81,7 +96,7 @@ $(function(){
       <!-- /.container -->
       <!-- FOOTER -->
       <footer class="container">
-    	<jsp:include page="fragments/footer.jsp"></jsp:include>
+    	<jsp:include page="../fragments/footer.jsp"></jsp:include>
       </footer>
    </main>
    
