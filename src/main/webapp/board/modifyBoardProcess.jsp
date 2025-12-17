@@ -11,6 +11,7 @@ request.setCharacterEncoding("UTF-8"); //위에 써야 된다~!!!!!!!!!!!!!!!!!!
 <jsp:useBean id="bDTO" class="kr.co.sist.borad.BoardDTO" scope="page"/>
 <jsp:setProperty property="*" name="bDTO"/>
 <%
+
 //web parameter로 title, content입력 되고 
 // 그 외 ip- request내장 객체 , id session에서 얻어야한다.
 bDTO.setIp(request.getRemoteAddr());
