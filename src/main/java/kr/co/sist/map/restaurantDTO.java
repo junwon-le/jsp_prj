@@ -2,17 +2,17 @@ package kr.co.sist.map;
 
 import java.util.Date;
 
-public class restaurantDTO {	
+public class RestaurantDTO {	
 
 
 	private int rest_num; //식당 식별 번호
 	private String id,rest_name,menu,info; // 회원 아이디 , 식당명, 메뉴, 정보
 	private double lat,	lng; //위도, 경도
 	private Date input_data; //입력일
-	public restaurantDTO() {
+	public RestaurantDTO() {
 		super();
 	}
-	public restaurantDTO(int rest_num, String id, String rest_name, String menu, String info, double lat, double lng,
+	public RestaurantDTO(int rest_num, String id, String rest_name, String menu, String info, double lat, double lng,
 			Date input_data) {
 		super();
 		this.rest_num = rest_num;
